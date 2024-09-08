@@ -1,0 +1,10 @@
+.env
+contract_state
+build
+built_artifacts
+
+*.png
+*.jpg
+
+node_modules
+package-lock.json
