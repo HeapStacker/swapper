@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Swappy - make a swap</title>
+	<style>
+		* {
+            margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		body {
+			width: 100vw;
+			height: 100vh;
+			z-index: 0;
+            position: relative;
+            background-color: var(--color1);
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            overflow: hidden;
+		}
+        body::after {
+            content: "";
+            position: absolute;
+            top: -10%;
+            left: -20%;
+            width: 200%;
+            height: 300%;
+            z-index: -1;
+            rotate: 20deg;
+            background-image: url("images/money.png");
+            opacity: 0.5;
+        }
+
+		:root {
+			--color1: #0e0e0e;
+			--color2: #1e1e1e;
+			--color3: #007bff;
+			--color3a: #51a4fc;
+			--color4: white;
+			--color5: rgba(0, 0, 0, 0.3)
+		}
+        .visibleArea {
+            width: 100vw;
+            height: 100vh;
+            height: 100svh;
+            
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 50px;
+        }
+        header {
+			padding-top: 20px;
+            width: 100%;
+			background-color: var(--color5);
+		}
+        nav {
+            padding: 0 50px;
+            text-align: center;
+
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+			flex-wrap: wrap;
+            gap: 15px;
+		}
+		h1, h2, p, a, pre, table, label {
+			color: var(--color4);
+		}
+		h1 {
+			font-size: 4rem;
+			flex: 3;
+		}
+        h2 {
+            font-size: 2rem;
+        }
+		nav > a {
+			text-decoration: none;
+			font-weight: bolder;
+			font-size: 1.5rem;
+			transition: 0.5s;
+			flex: 1;
+		}
+        nav > button {
+            flex: 1;
+            border: 0;
+            padding: 5px;
+        }
+        nav > button:hover {
+            scale: 1.02;
+            text-shadow: 0 0 10px var(--color4);
+        }
+		nav > a:hover {
+			text-shadow: 0 0 10px var(--color4);
+		}
+        .tradingSurface {
+            background-color: var(--color5);
+            border-radius: 30px;
+            border: 3px solid var(--color3);
+            padding: 20px 40px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .tradingSurface > *:not(:last-child) {
+            margin-bottom: 15px;
+        }
+        .flexRegion {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .flexRegion * {
+            padding: 10px;
+            border: 0;
+            border-radius: 5px;
+        }
+
+        .tradingSurface button {
+            width: 200px;
+            border: 0;
+            border-radius: 5px;
+            padding: 10px 30px;
+            transition: 0.2s;
+        }
+        button:hover {
+            scale: 1.02;
+            filter: grayscale(0.5);
+        }
+        footer {
+            margin-top: auto;
+            padding: 30px;
+        }
+        button.agree {
+            background: linear-gradient(145deg, var(--color3) 0%, var(--color2) 100%);
+            color: var(--color4);
+        }
+        .walletBundle {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        #connectWallet {
+            padding: 7px 10px;
+            border: 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="visibleArea">
+        <header>
+            <nav>
+				<h1>Swappy</h1>
+				<a href="./index.html">Home</a>
+				<a href="https://app.uniswap.org/explore/pools">Browse pools</a>
+                <div class="walletBundle">
+                    <button id="connectWallet">Connect wallet</button>
+                    <p id="connectedWalletAddress">0xaaaaaaa......cccccccccc</p>
+                </div>
+			</nav>
+        </header>
+        <div class="tradingSurface">
+            <div class="flexRegion">
+                <input type="text" id="tokenIn" placeholder="tokenIn: 0xac683daf7...">
+                <input type="number" id="tokenInAmount" placeholder="num of tokens to swap">
+                <input type="text" id="tokenOut" placeholder="tokenOut: 0x1537ab7297a...">
+            </div>
+            <button id="swap">Swap</button>
+            <div class="flexRegion">
+                <button id="depositETH">depositETH (gain WETH)</button>
+                <button id="withdrawETH">withdrawETH</button>
+            </div>
+            <div class="flexRegion">
+                <button class="agree" id="checkWeth">Check for weth balance</button>
+                <input type="text" id="tokenAddress" placeholder="Token address: 0x4c567a...">
+                <button class="agree" id="checkToken">Check this token balance</button>
+            </div>
+        </div>
+        <footer>
+            <p>&copy; Made by Martin T</p>
+        </footer>
+    </div>
+</body>
+<script type="module" src="./swap.js"></script>
+</html>
